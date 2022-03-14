@@ -20,7 +20,7 @@ async function main() {
   await greeter.deployed();
 
   console.log("Greeter deployed to:", greeter.address);
-
+  process.env.GREENTER_CONTRACT_ADDRESS = greeter.address;
 
   const TodoList = await ethers.getContractFactory("TodoList");
   const todoList = await TodoList.deploy();
