@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "build": "lerna run build --include-dependencies",
+    "hardhat": "yarn workspace @matcha-cream/contract hardhat node",
+    "deploy": "yarn workspace @matcha-cream/contract hardhat run scripts/deploy.ts --network localhost",
+    "start:dev":"yarn workspace @matcha-cream/web start:dev",
     "lint": "lerna run lint",
     "lint:fix": "lerna run lint"
   },
