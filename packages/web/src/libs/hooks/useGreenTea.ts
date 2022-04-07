@@ -28,6 +28,7 @@ export const useGreenTeaContent = (
   //メタマスクのウォレットアドレスが変わった時に実行する関数
   const accountChangedHandler = (accounts: string[]) => {
     setAccounts(accounts);
+    setAccount(accounts?.[0]);
   };
 
   //接続されているチェーンが切り替わった時に実行する関数
@@ -35,14 +36,11 @@ export const useGreenTeaContent = (
     window.location.reload();
   };
 
-  useEffect(() => {
-    updateEthers()
-  }, [signer])
-
   //provider,signer,contractの設定
   const updateEthers = () => {
     setProvider(provider);
     setSigner(signer);
+
     //アカウントが切り替わった時のイベントを拾う
     (window as any).ethereum.on("accountsChanged", accountChangedHandler);
     //接続されているチェーンが切り替わった時のイベントを拾う
@@ -50,11 +48,7 @@ export const useGreenTeaContent = (
   };
 
   useEffect(() => {
-    const getAccount = async () => {
-      const _account = accounts?.[0];
-      setAccount(_account);
-    }
-    getAccount()
+    updateEthers()
   }, [])
 
   return {
